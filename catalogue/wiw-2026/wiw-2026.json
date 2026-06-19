@@ -1,0 +1,106 @@
+{
+  "type": "Feature",
+  "stac_version": "1.1.0",
+  "stac_extensions": [],
+  "id": "wiw-2026",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          4.917026853034829,
+          43.32871696861705
+        ],
+        [
+          4.917026853034829,
+          43.7049885209665
+        ],
+        [
+          4.230275935343956,
+          43.7049885209665
+        ],
+        [
+          4.230275935343956,
+          43.32871696861705
+        ],
+        [
+          4.917026853034829,
+          43.32871696861705
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    4.230275935343956,
+    43.32871696861705,
+    4.917026853034829,
+    43.7049885209665
+  ],
+  "properties": {
+    "title": "Surfaces en eau - Camargue - 2026-04-15",
+    "wiw:area_ha": 45841.28,
+    "wiw:source_tiles": [
+      "S2A_31TEJ_20260415_0_L2A",
+      "S2A_31TFH_20260415_0_L2A",
+      "S2A_31TFJ_20260415_0_L2A"
+    ],
+    "wiw:nir_threshold": 0.1804,
+    "wiw:swir2_threshold": 0.1131,
+    "datetime": "2026-04-15T00:00:00Z"
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "Water In Wetlands - Camargue"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "Water In Wetlands - Camargue"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "Water In Wetlands - Camargue"
+    }
+  ],
+  "assets": {
+    "data": {
+      "href": "../../pipeline/wiw-2026/wiw-2026.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Masque WIW (raster, Cloud-Optimized GeoTIFF)",
+      "roles": [
+        "data"
+      ]
+    },
+    "geojson": {
+      "href": "../../pipeline/wiw-2026/wiw-2026.geojson",
+      "type": "application/geo+json",
+      "title": "Polygones eau (GeoJSON, WGS84)",
+      "roles": [
+        "data"
+      ]
+    },
+    "gpkg": {
+      "href": "../../pipeline/wiw-2026/wiw-2026.gpkg",
+      "type": "application/geopackage+sqlite3",
+      "title": "Polygones eau (GeoPackage)",
+      "roles": [
+        "data"
+      ]
+    },
+    "parquet": {
+      "href": "../../pipeline/wiw-2026/wiw-2026.parquet",
+      "type": "application/vnd.apache.parquet",
+      "title": "Polygones eau (GeoParquet)",
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "collection": "wiw-camargue"
+}

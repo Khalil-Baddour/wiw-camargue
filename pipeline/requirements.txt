@@ -1,0 +1,6 @@
+geopandas
+pystac-client
+rasterio
+shapely
+numpy
+pandas
