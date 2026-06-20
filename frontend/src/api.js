@@ -1,7 +1,7 @@
 // src/api.js
 // Centralise tous les appels vers le backend FastAPI.
 // L'URL de base est en variable d'environnement pour faciliter le déploiement
-// (en local : http://localhost:8000, en prod : l'URL de votre serveur).
+// (en local : http://localhost:8000, en prod : l'URL du serveur VPS).
 
 const API_BASE = import.meta.env.VITE_API_BASE ?? "http://localhost:8000";
 

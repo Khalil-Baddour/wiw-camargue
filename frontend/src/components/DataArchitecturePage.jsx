@@ -71,8 +71,21 @@ const PIPELINE_STEPS = [
   {
     step: "6",
     title: "Diffusion",
-    detail:
-      "Catalogue statique servi par FastAPI (StaticFiles) + 2 endpoints JSON consommés par ce frontend. Tout est conteneurisé (docker-compose) pour le déploiement.",
+    detail: (
+      <>
+        Catalogue statique servi par FastAPI (StaticFiles) + 2 endpoints JSON
+        consommés par ce frontend. Tout est conteneurisé (docker-compose) pour
+        le déploiement.{" "}
+        <a
+          href="https://github.com/Khalil-Baddour/wiw-camargue"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#1a6eb5", display: "inline-flex", alignItems: "center", gap: "4px" }}
+        >
+          Code source <RxOpenInNewWindow size={13} />
+        </a>
+      </>
+    ),
     tech: "FastAPI · Docker",
   },
 ];
@@ -192,7 +205,7 @@ export default function DataArchitecturePage({ items }) {
 
   Code source :{" "}
     <a
-    href="https://github.com/Khalil-Baddour/wiw-camargue/pipeline/"
+    href="https://github.com/Khalil-Baddour/wiw-camargue/tree/bf9928c6283c5768a1a4834b4416f48bc72b3942/pipeline"
     target="_blank"
     rel="noopener noreferrer"
     style={{ color: "#1a6eb5", display: "inline-flex", alignItems: "center", gap: "4px" }}
