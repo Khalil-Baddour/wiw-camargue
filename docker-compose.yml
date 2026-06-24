@@ -1,0 +1,41 @@
+services:
+
+  # ── Backend FastAPI ────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+    volumes:
+      - ./catalogue:/catalogue:ro   # catalogue STAC en lecture seule
+    expose:
+      - "8000"
+    restart: unless-stopped
+
+  # ── Nginx : build React + reverse proxy SSL ────────────────────────────────
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+      args:
+        VITE_API_BASE: https://stac-wiw.kbaddour.fr
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt:ro
+      - ./certbot/www:/var/www/certbot:ro
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  # ── Certbot : renouvellement automatique des certificats ──────────────────
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: >
+      /bin/sh -c "trap exit TERM;
+                  while :; do
+                    certbot renew;
+                    sleep 12h & wait $${!};
+                  done"

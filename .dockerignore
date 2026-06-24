@@ -1,0 +1,27 @@
+# Python
+backend/venv/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+
+# Node
+frontend/node_modules/
+
+# Git
+.git/
+.gitignore
+
+# Jupyter / pipeline
+pipeline/
+**/.ipynb_checkpoints/
+**/*.ipynb
+
+# Docs
+docs/
+
+# Docker / certbot (générés à l'exécution)
+certbot/
+
+# IDE
+.vscode/
+.idea/
