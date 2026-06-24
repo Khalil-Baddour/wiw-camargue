@@ -5,37 +5,34 @@ services:
     build:
       context: ./backend
     volumes:
-      - ./catalogue:/catalogue:ro   # catalogue STAC en lecture seule
+      - ./catalogue:/catalogue:ro
     expose:
       - "8000"
     restart: unless-stopped
 
-  # ── Nginx : build React + reverse proxy SSL ────────────────────────────────
+  # ── Nginx : build React + reverse proxy (SSL géré par Traefik) ────────────
   nginx:
     build:
       context: .
       dockerfile: nginx/Dockerfile
       args:
         VITE_API_BASE: https://stac-wiw.kbaddour.fr
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt:ro
-      - ./certbot/www:/var/www/certbot:ro
+    expose:
+      - "80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.wiw-camargue.rule=Host(`stac-wiw.kbaddour.fr`)"
+      - "traefik.http.routers.wiw-camargue.entrypoints=websecure"
+      - "traefik.http.routers.wiw-camargue.tls.certresolver=letsencrypt"
+      - "traefik.http.services.wiw-camargue.loadbalancer.server.port=80"
+    networks:
+      - default       # communication interne avec backend
+      - traefik_net   # visible par Traefik
     depends_on:
       - backend
     restart: unless-stopped
 
-  # ── Certbot : renouvellement automatique des certificats ──────────────────
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    entrypoint: >
-      /bin/sh -c "trap exit TERM;
-                  while :; do
-                    certbot renew;
-                    sleep 12h & wait $${!};
-                  done"
+networks:
+  traefik_net:
+    external: true
+    name: portfolio_default
